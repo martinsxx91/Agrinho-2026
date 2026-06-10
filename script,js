@@ -1,0 +1,21 @@
+// Seleciona todos os links do menu de navegação que apontam para um ID (#)
+const linksMenu = document.querySelectorAll('nav a[href^="#"]');
+
+linksMenu.forEach(link => {
+    link.addEventListener('click', function(item) {
+        // Previne o comportamento padrão do link de pular direto
+        item.preventDefault();
+        
+        // Pega o ID do destino (exemplo: #importancia)
+        const idDestino = this.getAttribute('href');
+        const secaoDestino = document.querySelector(idDestino);
+        
+        // Faz a rolagem suave até a seção, descontando a altura do menu fixo
+        if (secaoDestino) {
+            window.scrollTo({
+                top: secaoDestino.offsetTop - 70, // Ajuste para não cobrir o título
+                behavior: 'smooth' // Rola de forma suave
+            });
+        }
+    });
+});
